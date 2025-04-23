@@ -13,6 +13,7 @@ struct ProfileView: View {
       }
     }
     .padding(.horizontal, 24)
+    .navigationWithLarge(title: "ProfileView")
     .onChange(of: vm.errorMessage) { oldValue, newValue in
       if !newValue.isEmpty {
         router.showErrorModal(message: vm.errorMessage)
@@ -24,4 +25,5 @@ struct ProfileView: View {
 
 #Preview {
   ProfileView()
+    .previewWithRouter()
 }

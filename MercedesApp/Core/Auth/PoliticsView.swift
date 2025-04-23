@@ -23,7 +23,7 @@ struct PoliticsView: View {
         }
       }
       .padding(.horizontal, 24)
-      .modifier(NavigationModifier(title: "Terms & Conditions"))
+      .navigationWithInline(title: "Terms & Conditions")
     }
   }
   

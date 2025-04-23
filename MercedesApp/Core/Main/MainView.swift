@@ -9,7 +9,7 @@ struct MainView: View {
       switch appState.currentRoute {
         case .splash: SplashView()
         case .login: AuthView()
-        case .home: HomeView()
+        case .home: DelegateView()
       }
     }
     .id(appState.currentUserId)

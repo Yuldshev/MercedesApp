@@ -12,7 +12,7 @@ struct AuthView: View {
       BottomText
     }
     .padding(.horizontal, 24)
-    .navigationTitle("Authentication")
+    .navigationWithLarge(title: "Authentication")
   }
   
   //MARK: - EmailAuth
@@ -82,5 +82,6 @@ enum Field {
 #Preview {
   NavigationStack {
     AuthView()
+      .previewWithRouter()
   }
 }

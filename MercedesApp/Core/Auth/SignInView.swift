@@ -28,7 +28,7 @@ struct SignInView: View {
       }
     }
     .padding(.horizontal, 24)
-    .modifier(NavigationModifier(title: "Sign In"))
+    .navigationWithInline(title: "Sign In")
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         focused = .email

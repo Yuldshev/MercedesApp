@@ -31,7 +31,7 @@ struct RegisterView: View {
       }
     }
     .padding(.horizontal, 24)
-    .modifier(NavigationModifier(title: "Create Account"))
+    .navigationWithInline(title: "Create Account")
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         focused = .email

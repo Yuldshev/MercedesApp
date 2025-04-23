@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeView: View {
+struct DelegateView: View {
   @State private var selectedTab: Tab = .home
   
   init() { UITabBar.appearance().isHidden = true }
@@ -10,11 +10,11 @@ struct HomeView: View {
       VStack {
         switch selectedTab {
           case .home:
-            EmptyView()
+            HomeView()
           case .catalogue:
-            EmptyView()
+            CatalogView()
           case .favorite:
-            EmptyView()
+            FavoriteView()
           case .profile:
             ProfileView()
         }
@@ -29,5 +29,6 @@ struct HomeView: View {
 }
 
 #Preview {
-  HomeView()
+  DelegateView()
+    .previewWithRouter()
 }
