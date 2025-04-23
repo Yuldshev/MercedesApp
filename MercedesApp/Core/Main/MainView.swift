@@ -12,10 +12,10 @@ struct MainView: View {
         case .home: HomeView()
       }
     }
+    .id(appState.currentUserId)
   }
 }
 
-
 #Preview {
-  MainView()
+  MainView().environmentObject(AppState())
 }

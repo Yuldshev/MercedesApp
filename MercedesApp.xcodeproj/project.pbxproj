@@ -8,15 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		1678EA492DB797740023FD82 /* SwiftfulRouting in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA482DB797740023FD82 /* SwiftfulRouting */; };
+		1678EA6D2DB8A7320023FD82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA6C2DB8A7320023FD82 /* FirebaseAuth */; };
+		1678EA6F2DB8A7320023FD82 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA6E2DB8A7320023FD82 /* FirebaseDatabase */; };
+		1678EA712DB8A7320023FD82 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA702DB8A7320023FD82 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1678EA392DB7950C0023FD82 /* MercedesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MercedesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1678EA752DB8A7430023FD82 /* Exceptions for "MercedesApp" folder in "MercedesApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1678EA382DB7950C0023FD82 /* MercedesApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1678EA3B2DB7950C0023FD82 /* MercedesApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1678EA752DB8A7430023FD82 /* Exceptions for "MercedesApp" folder in "MercedesApp" target */,
+			);
 			path = MercedesApp;
 			sourceTree = "<group>";
 		};
@@ -27,7 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1678EA6F2DB8A7320023FD82 /* FirebaseDatabase in Frameworks */,
+				1678EA712DB8A7320023FD82 /* FirebaseFirestore in Frameworks */,
 				1678EA492DB797740023FD82 /* SwiftfulRouting in Frameworks */,
+				1678EA6D2DB8A7320023FD82 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +90,9 @@
 			name = MercedesApp;
 			packageProductDependencies = (
 				1678EA482DB797740023FD82 /* SwiftfulRouting */,
+				1678EA6C2DB8A7320023FD82 /* FirebaseAuth */,
+				1678EA6E2DB8A7320023FD82 /* FirebaseDatabase */,
+				1678EA702DB8A7320023FD82 /* FirebaseFirestore */,
 			);
 			productName = MercedesApp;
 			productReference = 1678EA392DB7950C0023FD82 /* MercedesApp.app */;
@@ -102,6 +124,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1678EA472DB797740023FD82 /* XCRemoteSwiftPackageReference "SwiftfulRouting" */,
+				1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1678EA3A2DB7950C0023FD82 /* Products */;
@@ -265,11 +288,13 @@
 				DEVELOPMENT_TEAM = 9WVBG69A9A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MercedesApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -277,9 +302,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "yuld-shev.MercedesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -293,11 +322,13 @@
 				DEVELOPMENT_TEAM = 9WVBG69A9A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MercedesApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,9 +336,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "yuld-shev.MercedesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -343,6 +378,14 @@
 				minimumVersion = 5.3.6;
 			};
 		};
+		1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -350,6 +393,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1678EA472DB797740023FD82 /* XCRemoteSwiftPackageReference "SwiftfulRouting" */;
 			productName = SwiftfulRouting;
+		};
+		1678EA6C2DB8A7320023FD82 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		1678EA6E2DB8A7320023FD82 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		1678EA702DB8A7320023FD82 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

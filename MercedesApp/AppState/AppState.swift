@@ -1,21 +1,54 @@
 import Foundation
+import FirebaseAuth
+import SwiftUI
 
 enum AppRoute {
   case splash, login, home
 }
 
+@MainActor
 final class AppState: ObservableObject {
   @Published var currentRoute: AppRoute = .splash
+  @Published var currentUserId = ""
   
-  init() { showSplash() }
+  private var handler: AuthStateDidChangeListenerHandle?
   
-  private func showSplash() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-      self.checkAuth()
+  var authStatus: Bool {
+    return !currentUserId.isEmpty
+  }
+  
+  init() {
+    setupFirebaseAuthListener()
+    Task { await showSplashAndNavigate() }
+  }
+  
+  deinit {
+    if let handler = handler {
+      Auth.auth().removeStateDidChangeListener(handler)
     }
   }
   
-  private func checkAuth() {
-    self.currentRoute = .login
+  private func setupFirebaseAuthListener() {
+    handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+      guard let self else {
+        return
+      }
+      self.currentUserId = user?.uid ?? ""
+      Task { await self.updateRouteBasedOnAuth() }
+    }
+  }
+  
+  private func showSplashAndNavigate() async {
+    currentRoute = .splash
+    try? await Task.sleep(nanoseconds: 2_000_000_000)
+    let isSignIn = Auth.auth().currentUser != nil
+    await updateRouteBasedOnAuth(isSignedIn: isSignIn)
+  }
+  
+  private func updateRouteBasedOnAuth(isSignedIn: Bool? = nil) async {
+    let authStatus = isSignedIn ?? self.authStatus
+    withAnimation {
+      currentRoute = authStatus ? .home : .login
+    }
   }
 }
