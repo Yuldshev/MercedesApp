@@ -18,10 +18,12 @@ struct ProfileView: View {
     .padding(.horizontal, 24)
     .navigationWithLarge(title: "ProfileView")
     .task { await vm.fetchUser() }
-    .onChange(of: vm.errorMessage) { oldValue, newValue in
-      if !newValue.isEmpty {
-        router.showErrorModal(message: vm.errorMessage)
-        vm.errorMessage = ""
+    .onChange(of: vm.message) { _, new in
+      switch new {
+        case .error(let text):
+          router.showErrorModal(message: text)
+        case .success(let text):
+          router.showSuccessModal(message: text)
       }
     }
   }

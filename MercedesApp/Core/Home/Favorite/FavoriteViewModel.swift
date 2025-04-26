@@ -3,7 +3,7 @@ import Foundation
 @MainActor
 final class FavoriteViewModel: ObservableObject {
   @Published private(set) var favorites: [CarDisplay] = []
-  @Published var errorMessage = ""
+  @Published var message: AppMessage = .error("")
   
   private let service: FavoriteServiceProtocol
   
@@ -44,7 +44,7 @@ final class FavoriteViewModel: ObservableObject {
       self.favorites = try await service.loadCloud()
       service.saveFavorites(favorites)
     } catch {
-      self.errorMessage = error.localizedDescription
+      self.message = .error(error.localizedDescription)
     }
   }
 }

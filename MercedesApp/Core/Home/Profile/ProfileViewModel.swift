@@ -4,7 +4,7 @@ import FirebaseAuth
 @MainActor
 final class ProfileViewModel: ObservableObject {
   @Published var user: User?
-  @Published var errorMessage = ""
+  @Published var message: AppMessage = .error("")
   
   private let service: FireStoreProtocol
   
@@ -14,14 +14,14 @@ final class ProfileViewModel: ObservableObject {
   
   func fetchUser() async {
     guard let userId = Auth.auth().currentUser?.uid else {
-      errorMessage = "User not authenticated"
+      message = .error("User not authenticated")
       return
     }
     
     do {
       self.user = try await service.loadDocument(collection: "users", documentId: userId, as: User.self)
     } catch {
-      self.errorMessage = error.localizedDescription
+      self.message = .error("\(error.localizedDescription)")
     }
   }
   
@@ -30,7 +30,7 @@ final class ProfileViewModel: ObservableObject {
       try Auth.auth().signOut()
       user = nil
     } catch {
-      errorMessage = "Could not sign out"
+      message = .error("Could not sign out")
     }
   }
 }

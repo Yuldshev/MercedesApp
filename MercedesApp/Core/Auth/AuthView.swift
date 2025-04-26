@@ -20,7 +20,7 @@ struct AuthView: View {
     VStack(spacing: 16) {
       CustomButton(title: "Sign In", color: .blue) {
         router.showScreen(.push) { _ in
-          SignInView()
+          LoginView()
         }
       }
       

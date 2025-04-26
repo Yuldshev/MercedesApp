@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SignInView: View {
+struct LoginView: View {
   @StateObject private var vm = LoginViewModel()
   @FocusState var focused: Field?
   @Environment(\.router) var router
@@ -34,15 +34,18 @@ struct SignInView: View {
         focused = .email
       }
     }
-    .onChange(of: vm.errorMessage) { oldValue, newValue in
-      if !newValue.isEmpty {
-        router.showErrorModal(message: vm.errorMessage)
-        vm.errorMessage = ""
+    .onChange(of: vm.message) { _, new in
+      switch new {
+        case .error(let text):
+          router.showErrorModal(message: text)
+        case .success(let text):
+          router.showSuccessModal(message: text)
       }
     }
   }
 }
 
 #Preview {
-  SignInView()
+  LoginView()
+    .previewWithRouter()
 }

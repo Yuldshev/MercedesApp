@@ -4,7 +4,7 @@ import Foundation
 final class CarViewModel: ObservableObject {
   @Published var allClass: [TypeClasses: [CarClass]] = [:]
   @Published var isLoading = false
-  @Published var errorMessage = ""
+  @Published var message: AppMessage = .error("")
   
   private var dataService: DataServiceProtocol
   
@@ -38,18 +38,17 @@ final class CarViewModel: ObservableObject {
     let header = MercedesAPI.headers
     
     if let cached: [CarClass] = dataService.loadFromCache(key: cacheKey.fullName, as: [CarClass].self) {
-      print("Loaded \(cacheKey) from cache")
+      self.message = .success("Load form Cache")
       return cached
     }
     
     do {
       let result: [CarClass] = try await dataService.fetch(url, header: header)
       dataService.saveToCache(result, key: cacheKey.fullName)
-      print("Loaded from API")
+      self.message = .success("Load from API")
       return result
     } catch {
-      self.errorMessage = "Ошибка при загрузке \(cacheKey.fullName): \(error.localizedDescription)"
-      print(error)
+      self.message = .error("\(cacheKey.fullName): \(error.localizedDescription)")
       return []
     }
   }

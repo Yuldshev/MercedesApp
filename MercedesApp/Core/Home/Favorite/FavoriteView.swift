@@ -1,15 +1,24 @@
 import SwiftUI
 
 struct FavoriteView: View {
-  @EnvironmentObject var vmFav: FavoriteViewModel
+  @EnvironmentObject var vm: FavoriteViewModel
+  @Environment(\.router) var router
   
   var body: some View {
     VStack {
-      List(vmFav.favorites) { item in
+      List(vm.favorites) { item in
         Text(item.name)
       }
     }
     .navigationWithLarge(title: "Favorite List")
+    .onChange(of: vm.message) { _, new in
+      switch new {
+        case .error(let text):
+          router.showErrorModal(message: text)
+        case .success(let text):
+          router.showSuccessModal(message: text)
+      }
+    }
   }
 }
 

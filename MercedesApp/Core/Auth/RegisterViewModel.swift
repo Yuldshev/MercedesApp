@@ -6,7 +6,8 @@ final class RegisterViewModel: ObservableObject {
   @Published var email = ""
   @Published var password = ""
   @Published var confirmPassword = ""
-  @Published var errorMessage = ""
+  
+  @Published var message: AppMessage = .error("")
   
   private let service: FireStoreProtocol
   
@@ -20,9 +21,10 @@ final class RegisterViewModel: ObservableObject {
     do {
       let result = try await Auth.auth().createUser(withEmail: email, password: password)
       let userId = result.user.uid
+      self.message = .success("Registration successful")
       await createUser(id: userId)
     } catch {
-      self.errorMessage = error.localizedDescription
+      self.message = .error("\(error.localizedDescription)")
     }
   }
   
@@ -32,29 +34,29 @@ final class RegisterViewModel: ObservableObject {
     do {
       try await service.saveData(collection: "users", dataId: id, data: newUser)
     } catch {
-      self.errorMessage = error.localizedDescription
+      self.message = .error("\(error.localizedDescription)")
     }
   }
   
   private func validate() -> Bool {
     guard !name.trimmingCharacters(in: .whitespaces).isEmpty, !email.trimmingCharacters(in: .whitespaces).isEmpty,
       !password.trimmingCharacters(in: .whitespaces).isEmpty else {
-      errorMessage = "Enter a valid Data"
+      message = .error("Enter a valid Data")
       return false
     }
     
     guard email.contains("@") && email.contains(".") else {
-      errorMessage = "Enter a valid Email"
+      message = .error("Enter a valid Email")
       return false
     }
     
     guard password.count > 6 else {
-      errorMessage = "Password length should be greater than 6"
+      message = .error("Password length should be greater than 6")
       return false
     }
     
     guard password == confirmPassword else {
-      errorMessage = "Password are not matching"
+      message = .error("Password are not matching")
       return false
     }
     return true

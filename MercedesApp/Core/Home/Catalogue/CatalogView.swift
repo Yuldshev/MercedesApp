@@ -23,6 +23,22 @@ struct CatalogView: View {
       }
     }
     .navigationWithLarge(title: "Catalogue")
+    .onChange(of: vm.message) { _, new in
+      switch new {
+        case .error(let text):
+          router.showErrorModal(message: text)
+        case .success(let text):
+          router.showSuccessModal(message: text)
+      }
+    }
+    .onChange(of: vmFav.message) { _, new in
+      switch new {
+        case .error(let text):
+          router.showErrorModal(message: text)
+        case .success(let text):
+          router.showSuccessModal(message: text)
+      }
+    }
     
     //TODO: - DELETE COMPLETE
     .task {
