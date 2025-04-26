@@ -2,7 +2,7 @@ import Foundation
 import FirebaseAuth
 
 @MainActor
-final class SignInViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
   @Published var email = ""
   @Published var password = ""
   @Published var errorMessage = ""
@@ -11,7 +11,6 @@ final class SignInViewModel: ObservableObject {
     guard validate() else { return }
     do {
       let _ = try await Auth.auth().signIn(withEmail: email, password: password)
-      print("Success auth")
     } catch {
       self.errorMessage = error.localizedDescription
     }

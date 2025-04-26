@@ -6,6 +6,9 @@ struct ProfileView: View {
   
   var body: some View {
     VStack {
+      Text(vm.user?.name ?? "")
+      Text(vm.user?.email ?? "")
+      
       CustomButton(title: "Log out", color: .pink) {
         Task {
           await vm.signOut()
@@ -14,6 +17,7 @@ struct ProfileView: View {
     }
     .padding(.horizontal, 24)
     .navigationWithLarge(title: "ProfileView")
+    .task { await vm.fetchUser() }
     .onChange(of: vm.errorMessage) { oldValue, newValue in
       if !newValue.isEmpty {
         router.showErrorModal(message: vm.errorMessage)

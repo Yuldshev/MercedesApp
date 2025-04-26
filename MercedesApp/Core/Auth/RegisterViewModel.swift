@@ -1,6 +1,5 @@
 import Foundation
 import FirebaseAuth
-import FirebaseFirestore
 
 final class RegisterViewModel: ObservableObject {
   @Published var name = ""
@@ -8,6 +7,12 @@ final class RegisterViewModel: ObservableObject {
   @Published var password = ""
   @Published var confirmPassword = ""
   @Published var errorMessage = ""
+  
+  private let service: FireStoreProtocol
+  
+  init(service: FireStoreProtocol = FireStoreService()) {
+    self.service = service
+  }
   
   func register() async {
     guard validate() else { return }
@@ -24,10 +29,11 @@ final class RegisterViewModel: ObservableObject {
   private func createUser(id: String) async {
     let newUser = User(id: id, name: name, email: email, joined: Date().timeIntervalSince1970)
     
-    let db = Firestore.firestore()
-    try? await db.collection("users")
-      .document(id)
-      .setData(newUser.asDict())
+    do {
+      try await service.saveData(collection: "users", dataId: id, data: newUser)
+    } catch {
+      self.errorMessage = error.localizedDescription
+    }
   }
   
   private func validate() -> Bool {
