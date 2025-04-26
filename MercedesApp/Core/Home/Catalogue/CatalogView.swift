@@ -6,7 +6,7 @@ struct CatalogView: View {
   @Environment(\.router) var router
   
   var filteredCars: [CarDisplayCategory] {
-    vm.getDisplayCategories()
+    vm.getClasses()
   }
   
   var body: some View {

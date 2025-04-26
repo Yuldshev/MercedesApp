@@ -1,7 +1,7 @@
 import Foundation
 
 extension CarViewModel {
-  func getDisplayCategories() -> [CarDisplayCategory] {
+  func getClasses() -> [CarDisplayCategory] {
     var categories: [String: [CarDisplay]] = [:]
     
     for (_, carClasses) in allClass {
