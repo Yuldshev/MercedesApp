@@ -27,6 +27,11 @@ final class CarViewModel: ObservableObject {
     self.allClass = tempData
   }
   
+  func clearCache() {
+    dataService.clearCache()
+    allClass = [:]
+  }
+  
   private func fetchData(cacheKey: TypeClasses) async -> [CarClass] {
     let url = MercedesAPI.getUrl(className: cacheKey)
     let header = MercedesAPI.headers
@@ -43,6 +48,7 @@ final class CarViewModel: ObservableObject {
       return result
     } catch {
       self.errorMessage = "Ошибка при загрузке \(cacheKey.fullName): \(error.localizedDescription)"
+      print(error)
       return []
     }
   }

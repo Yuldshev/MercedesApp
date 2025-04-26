@@ -8,20 +8,24 @@ struct CarClass: Identifiable, Codable {
   var id: String { classId }
 }
 
-struct BodyType: Codable {
+struct BodyType: Codable, Identifiable {
+  let bodytypeId: String
+  let bodytypeName: String
   let models: [Models]
+  
+  var id: String { bodytypeId }
 }
 
 struct Models: Codable {
-  let modelSeries: String
   let vehicles: [Vehicles]
 }
 
 struct Vehicles: Codable, Identifiable {
   let bodytypeName: String
+  let name: String
   let modelYear: String
-  let financeData: FinanceData?
-  let technicalData: TechnicalData?
+  let financeData: FinanceData
+  let technicalData: TechnicalData
   let images: Images?
   
   var id: String { bodytypeName }
@@ -29,16 +33,11 @@ struct Vehicles: Codable, Identifiable {
 
 //MARK: -  FinanceData
 struct FinanceData: Codable {
-  let currency: String
-  let prices: Prices?
+  let prices: Prices
 }
 
 struct Prices: Codable {
-  let priceAutomatic: PriceAutomatic?
-  
-  enum CodableKeys: String, CodingKey {
-    case priceAutomatic = "automatic"
-  }
+  let automatic: PriceAutomatic
 }
 
 struct PriceAutomatic: Codable {
@@ -55,6 +54,12 @@ struct Engine: Codable {
   let topSpeed: MeasurementValue?
   let combinedPowerInHp: MeasurementValue?
   let combinedTorque: MeasurementValue?
+  let combustionEngine: CombustionEngine?
+}
+
+struct CombustionEngine: Codable {
+  let powerInHp: MeasurementValue?
+  let torque: MeasurementValue?
 }
 
 struct Body: Codable {
@@ -90,4 +95,8 @@ struct Images: Codable {
 struct MeasurementValue: Codable {
   let value: Int
   let unit: String
+  
+  var formatted: String {
+    "\(value) \(unit)"
+  }
 }

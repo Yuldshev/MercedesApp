@@ -1,22 +1,29 @@
 import Foundation
+import Alamofire
 
 protocol DataServiceProtocol {
   func fetch<T: Decodable>(_ url: URL, header: [String: String]) async throws -> T
   func saveToCache<T: Encodable>(_ data: T, key: String)
   func loadFromCache<T: Decodable>(key: String, as type: T.Type) -> T?
+  func clearCache()
 }
 
 final class DataService: DataServiceProtocol {
   func fetch<T>(_ url: URL, header: [String : String]) async throws -> T where T : Decodable {
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
+    let headers = HTTPHeaders(header)
     
-    for (key, value) in header {
-      request.setValue(value, forHTTPHeaderField: key)
+    return try await withCheckedThrowingContinuation { continuation in
+      AF.request(url, method: .get, headers: headers)
+        .validate()
+        .responseDecodable(of: T.self) { response in
+          switch response.result {
+            case .success(let decodedData):
+              continuation.resume(returning: decodedData)
+            case .failure(let error):
+              continuation.resume(throwing: error)
+          }
+        }
     }
-    
-    let (data, _) = try await URLSession.shared.data(for: request)
-    return try JSONDecoder().decode(T.self, from: data)
   }
   
   func saveToCache<T>(_ data: T, key: String) where T : Encodable {
@@ -33,4 +40,10 @@ final class DataService: DataServiceProtocol {
     return decoded
   }
   
+  func clearCache() {
+    let keys = TypeClasses.allCases.map { $0.fullName }
+    for key in keys {
+      UserDefaults.standard.removeObject(forKey: key)
+    }
+  }
 }
