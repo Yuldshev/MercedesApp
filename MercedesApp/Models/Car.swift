@@ -94,9 +94,4 @@ struct Images: Codable {
 //MARK: - Help Struct
 struct MeasurementValue: Codable {
   let value: Int
-  let unit: String
-  
-  var formatted: String {
-    "\(value) \(unit)"
-  }
 }

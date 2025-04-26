@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension String {
-  func removingText() -> String {
+  var removingText: String {
     let keywords = ["Compact", "Compact Saloon", "Saloon"]
     var cleaned = self
     for keyword in keywords {

@@ -12,14 +12,15 @@ final class CarViewModel: ObservableObject {
     self.dataService = service
   }
   
-  func fetchAllClass(limit: Int) async {
+  func fetchAllClass() async {
+    guard allClass.isEmpty else { return }
+    
     isLoading = true
     defer { isLoading = false }
     
     var tempData: [TypeClasses: [CarClass]] = [:]
-    let limitedClass = Array(TypeClasses.allCases.prefix(limit))
     
-    for typeClass in limitedClass {
+    for typeClass in TypeClasses.allCases {
       let result = await fetchData(cacheKey: typeClass)
       tempData[typeClass] = result
     }

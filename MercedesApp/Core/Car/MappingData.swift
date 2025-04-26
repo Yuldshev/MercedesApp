@@ -1,47 +1,53 @@
 import Foundation
 
 extension CarViewModel {
-  func getDisplayCar() -> [CarDisplay] {
-    var result: [String: CarDisplay] = [:]
+  func getDisplayCategories() -> [CarDisplayCategory] {
+    var categories: [String: [CarDisplay]] = [:]
     
-    for(_, carClasses) in allClass {
+    for (_, carClasses) in allClass {
       for carClass in carClasses {
+        var cars: [CarDisplay] = []
+        
         for bodyType in carClass.bodytypes {
           for model in bodyType.models {
-            for vehical in model.vehicles {
-              let id = vehical.name
-              
-              if result[id] != nil { continue }
-              
-              let finance = vehical.financeData.prices.automatic.price
-              let engine = vehical.technicalData.engine
-              let body = vehical.technicalData.body
-              
+            for vehicle in model.vehicles {
+              let finance = vehicle.financeData.prices.automatic.price
+              let engine = vehicle.technicalData.engine
+              let body = vehicle.technicalData.body
               let dimensions = body?.dimensions
               let weight = body?.weights?.weightsAutomatic
               
-              let display = CarDisplay(
-                name: vehical.name.removingText(),
-                body: vehical.bodytypeName,
-                price: finance,
-                topSpeed: engine?.topSpeed?.formatted ?? "n/a",
-                powerHp: engine?.combinedPowerInHp?.formatted ?? engine?.combustionEngine?.powerInHp?.formatted ?? "n/a",
-                torque: engine?.combinedTorque?.formatted ?? engine?.combustionEngine?.torque?.formatted ?? "n/a",
-                lenght: dimensions?.length?.formatted ?? "n/a",
-                width: dimensions?.width?.formatted ?? "n/a",
-                height: dimensions?.height?.formatted ?? "n/a",
-                wheelBase: dimensions?.wheelBase?.formatted ?? "n/a",
-                weight: weight?.weightMax?.formatted ?? "n/a",
-                imageURL: vehical.images?.stage
+              let car = CarDisplay(
+                name: vehicle.name.removingText,
+                body: bodyType.bodytypeName,
+                price: finance.formattedPrice,
+                topSpeed: engine?.topSpeed?.value.formattedTopSpeed ?? "n/a",
+                powerHp: engine?.combinedPowerInHp?.value.formattedHP ?? engine?.combustionEngine?.powerInHp?.value.formattedHP ?? "n/a",
+                torque: engine?.combinedTorque?.value.formattedTorque ?? engine?.combustionEngine?.torque?.value.formattedTorque ?? "n/a",
+                lenght: dimensions?.length?.value.formattedDimensions ?? "n/a",
+                width: dimensions?.width?.value.formattedDimensions ?? "n/a",
+                height: dimensions?.height?.value.formattedDimensions ?? "n/a",
+                wheelBase: dimensions?.wheelBase?.value.formattedDimensions ?? "n/a",
+                weight: weight?.weightMax?.value.formattedDimensions ?? "n/a",
+                imageURL: vehicle.images?.stage
               )
-              result[id] = display
+              
+              cars.append(car)
             }
+          }
+        }
+        
+        if !cars.isEmpty {
+          if categories[carClass.className] != nil {
+            categories[carClass.className]?.append(contentsOf: cars)
+          } else {
+            categories[carClass.className] = cars
           }
         }
       }
     }
     
-    return Array(result.values)
+    let result = categories.map { CarDisplayCategory(className: $0.key, cars: $0.value) }
+    return result.sorted { $0.className < $1.className }
   }
 }
-

@@ -9,9 +9,11 @@ extension Double {
     let formatted = formatter.string(from: NSNumber(value: self)) ?? "\(self)"
     return "\(formatted) €"
   }
-  
+}
+
+extension Int {
   var formattedHP: String {
-    "\(Int(self)) HP"
+    "\(self) HP"
   }
   
   var formattedTopSpeed: String {
@@ -24,15 +26,6 @@ extension Double {
   
   var formattedDimensions: String {
     let sm = self / 10
-    return "\(sm.clean) sm"
-  }
-  
-  var clean: String {
-    let IntValue = Int(self)
-    if Double(IntValue) == self {
-      return "\(IntValue)"
-    } else {
-      return String(format: "%.1f", self)
-    }
+    return "\(sm) sm"
   }
 }

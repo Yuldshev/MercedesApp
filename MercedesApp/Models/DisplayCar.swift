@@ -1,10 +1,11 @@
 import Foundation
 
-struct CarDisplay: Identifiable {
-  let id = UUID()
+struct CarDisplay: Identifiable, Codable {
+  var id: String { name }
+  
   let name: String
   let body: String
-  let price: Double
+  let price: String
   let topSpeed: String
   let powerHp: String
   let torque: String
@@ -16,3 +17,8 @@ struct CarDisplay: Identifiable {
   let imageURL: URL?
 }
 
+struct CarDisplayCategory: Identifiable {
+  let id = UUID()
+  let className: String
+  let cars: [CarDisplay]
+}

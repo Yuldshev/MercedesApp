@@ -2,6 +2,8 @@ import SwiftUI
 
 struct DelegateView: View {
   @State private var selectedTab: Tab = .home
+  @StateObject private var vmCar = CarViewModel()
+  @StateObject private var vmLike = FavoriteViewModel()
   
   init() { UITabBar.appearance().isHidden = true }
   
@@ -11,10 +13,16 @@ struct DelegateView: View {
         switch selectedTab {
           case .home:
             HomeView()
+              .environmentObject(vmCar)
+              .environmentObject(vmLike)
           case .catalogue:
             CatalogView()
+              .environmentObject(vmCar)
+              .environmentObject(vmLike)
           case .favorite:
             FavoriteView()
+              .environmentObject(vmCar)
+              .environmentObject(vmLike)
           case .profile:
             ProfileView()
         }
@@ -24,6 +32,9 @@ struct DelegateView: View {
         Spacer()
         CustomTabView(selectedTab: $selectedTab)
       }
+    }
+    .task {
+      await vmCar.fetchAllClass()
     }
   }
 }
