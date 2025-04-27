@@ -1,4 +1,5 @@
 import SwiftUI
+import Pow
 
 struct DelegateView: View {
   @State private var selectedTab: Tab = .home
@@ -13,18 +14,21 @@ struct DelegateView: View {
         switch selectedTab {
           case .home:
             HomeView()
+              .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
               .environmentObject(vmCar)
               .environmentObject(vmLike)
           case .catalogue:
             CatalogView()
+              .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
               .environmentObject(vmCar)
               .environmentObject(vmLike)
           case .favorite:
             FavoriteView()
-              .environmentObject(vmCar)
+              .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
               .environmentObject(vmLike)
           case .profile:
             ProfileView()
+              .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
         }
       }
       

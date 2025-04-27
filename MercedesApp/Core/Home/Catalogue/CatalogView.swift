@@ -21,6 +21,7 @@ struct CatalogView: View {
           }
         }
       }
+      .listStyle(.plain)
     }
     .navigationWithLarge(title: "Catalogue")
     .onChange(of: vm.message) { _, new in

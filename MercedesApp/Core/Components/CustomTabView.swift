@@ -6,19 +6,10 @@ enum Tab: String, CaseIterable {
   
   var iconName: String {
     switch self {
-      case .home: return "house"
-      case .catalogue: return "car.side"
-      case .favorite: return "heart"
-      case .profile: return "person"
-    }
-  }
-  
-  var fillIcon: String {
-    switch self {
-      case .home: return "house.fill"
-      case .catalogue: return "car.side.fill"
-      case .favorite: return "heart.fill"
-      case .profile: return "person.fill"
+      case .home: return "icon.home"
+      case .catalogue: return "icon.class"
+      case .favorite: return "icon.like"
+      case .profile: return "icon.profile"
     }
   }
 }
@@ -29,13 +20,22 @@ struct TabIcon: View {
   let isSelected: Bool
   let onTap: () -> Void
   
+  var fillIcon: String {
+    tab.iconName + ".fill"
+  }
+  
   var body: some View {
-    Image(systemName: isSelected ? tab.fillIcon : tab.iconName)
+    Image(isSelected ? fillIcon : tab.iconName)
+      .resizable()
+      .scaledToFit()
+      .frame(width: 24, height: 24)
       .scaleEffect(isSelected ? 1.25 : 1)
+      .offset(y: isSelected ? -3 : 0)
       .foregroundStyle(isSelected ? .blue : .gray)
-      .font(.system(size: 22))
+      .padding(20)
+      .contentShape(Rectangle())
       .onTapGesture {
-        withAnimation {
+        withAnimation(.spring()) {
           onTap()
         }
       }
@@ -44,7 +44,12 @@ struct TabIcon: View {
 
 // MARK: - Custom Tab View
 struct CustomTabView: View {
+  @Environment(\.colorScheme) var threme
   @Binding var selectedTab: Tab
+  
+  var gradienColor: [Color] {
+    threme == .light ? [.gray.opacity(0.6), .white.opacity(0)] : [.white.opacity(0.6), .white.opacity(0)]
+  }
   
   var body: some View {
     VStack {
@@ -62,10 +67,15 @@ struct CustomTabView: View {
       .frame(height: 60)
       .background(.thinMaterial)
       .clipShape(RoundedRectangle(cornerRadius: 12))
+      .animation(.spring(), value: selectedTab)
       .overlay {
-        RoundedRectangle(cornerRadius: 12).stroke(LinearGradient(colors: [.white, .white.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing))
+        RoundedRectangle(cornerRadius: 12).stroke(LinearGradient(colors: gradienColor, startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 0.5)
       }
       .padding()
     }
   }
+}
+
+#Preview {
+  CustomTabView(selectedTab: .constant(.home))
 }

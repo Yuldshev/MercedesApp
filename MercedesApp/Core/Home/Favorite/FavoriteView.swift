@@ -9,6 +9,7 @@ struct FavoriteView: View {
       List(vm.favorites) { item in
         Text(item.name)
       }
+      .listStyle(.plain)
     }
     .navigationWithLarge(title: "Favorite List")
     .onChange(of: vm.message) { _, new in

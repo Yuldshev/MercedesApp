@@ -19,7 +19,6 @@ final class AppState: ObservableObject {
   
   init() {
     setupFirebaseAuthListener()
-    Task { await showSplashAndNavigate() }
   }
   
   deinit {
@@ -34,7 +33,10 @@ final class AppState: ObservableObject {
         return
       }
       self.currentUserId = user?.uid ?? ""
-      Task { await self.updateRouteBasedOnAuth() }
+      Task {
+        await self.showSplashAndNavigate()
+        await self.updateRouteBasedOnAuth()
+      }
     }
   }
   

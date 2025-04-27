@@ -15,6 +15,7 @@ struct HomeView: View {
         }
       }
     }
+    .listStyle(.plain)
     .navigationWithLarge(title: "Home")
     .task {
       await vm.fetchAllClass()
