@@ -6,6 +6,7 @@ final class RegisterViewModel: ObservableObject {
   @Published var email = ""
   @Published var password = ""
   @Published var confirmPassword = ""
+  @Published var isLoading = false
   
   @Published var message: AppMessage = .error("")
   
@@ -17,6 +18,9 @@ final class RegisterViewModel: ObservableObject {
   
   func register() async {
     guard validate() else { return }
+    
+    isLoading = true
+    defer { isLoading = false }
     
     do {
       let result = try await Auth.auth().createUser(withEmail: email, password: password)

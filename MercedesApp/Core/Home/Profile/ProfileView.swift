@@ -9,7 +9,7 @@ struct ProfileView: View {
       Text(vm.user?.name ?? "")
       Text(vm.user?.email ?? "")
       
-      CustomButton(title: "Log out", color: .pink) {
+      CustomButton(title: "Log out", image: nil, color: .pink) {
         Task {
           await vm.signOut()
         }

@@ -1,14 +1,21 @@
 import Foundation
 import FirebaseAuth
+import Firebase
 
 @MainActor
 final class LoginViewModel: ObservableObject {
   @Published var email = ""
   @Published var password = ""
+  @Published var isLoading = false
+  
   @Published var message: AppMessage = .error("")
   
   func login() async {
     guard validate() else { return }
+    
+    isLoading = true
+    defer { isLoading = false }
+    
     do {
       let _ = try await Auth.auth().signIn(withEmail: email, password: password)
       message = .success("Successfully Logged In")
@@ -16,8 +23,8 @@ final class LoginViewModel: ObservableObject {
       self.message = .error("\(error.localizedDescription)")
     }
   }
-  
-  func validate() -> Bool {
+    
+  private func validate() -> Bool {
     guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty else {
       message = .error("Enter a valid Email/Password")
       return false

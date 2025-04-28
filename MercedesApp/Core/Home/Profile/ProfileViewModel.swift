@@ -4,6 +4,8 @@ import FirebaseAuth
 @MainActor
 final class ProfileViewModel: ObservableObject {
   @Published var user: User?
+  @Published var isLoading = false
+  
   @Published var message: AppMessage = .error("")
   
   private let service: FireStoreProtocol
@@ -17,6 +19,9 @@ final class ProfileViewModel: ObservableObject {
       message = .error("User not authenticated")
       return
     }
+    
+    isLoading = true
+    defer { isLoading = false } 
     
     do {
       self.user = try await service.loadDocument(collection: "users", documentId: userId, as: User.self)

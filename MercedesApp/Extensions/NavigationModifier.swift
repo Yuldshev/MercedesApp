@@ -2,11 +2,11 @@ import SwiftUI
 
 struct InlineNavigation: ViewModifier {
   @Environment(\.dismiss) var dismiss
+  @State private var drag = CGSize.zero
   let title: String
   
   func body(content: Content) -> some View {
     content
-      .navigationTitle(title)
       .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden()
       .toolbar {
@@ -14,9 +14,17 @@ struct InlineNavigation: ViewModifier {
           Button { dismiss() } label: {
             Image(systemName: "chevron.left")
               .foregroundStyle(.black)
+              .padding(20)
+              .contentShape(Rectangle())
           }
         }
+        
+        ToolbarItem(placement: .principal) {
+          Text(title)
+            .font(.corporateAMedium(size: 24))
+        }
       }
+    
   }
 }
 
@@ -26,9 +34,15 @@ struct HeaderNavigation: ViewModifier {
   
   func body(content: Content) -> some View {
     content
-      .navigationTitle(title)
       .navigationBarTitleDisplayMode(.large)
       .navigationBarBackButtonHidden()
+      .toolbar {
+        ToolbarItem(placement: .navigation) {
+          Text(title)
+            .font(.corporateAMedium(size: 48))
+            
+        }
+      }
   }
 }
 

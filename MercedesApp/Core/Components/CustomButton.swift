@@ -1,22 +1,29 @@
 import SwiftUI
 
 struct CustomButton: View {
-  var title: String
-  var color: Color
-  var action: () -> Void
+  let title: String
+  let image: Image?
+  var color: Color = .black
+  let action: () -> Void
+  
+  
   var body: some View {
     Button(action: action) {
-      Text(title)
-        .font(.system(size: 16))
-        .foregroundStyle(.white)
-        .frame(maxWidth: .infinity)
-        .frame(height: 48)
-        .background(color)
-        .clipShape(Capsule())
+      HStack {
+        if let image {
+          image
+            .resizable()
+            .scaledToFit()
+            .frame(width: 16, height: 16)
+        }
+        Text(title)
+          .font(.arialRegular(size: 16))
+      }
+      .foregroundStyle(.white)
+      .frame(maxWidth: .infinity)
+      .frame(height: 52)
+      .background(color)
+      .clipShape(RoundedRectangle(cornerRadius: 12))
     }
   }
-}
-
-#Preview {
-  CustomButton(title: "Button", color: .pink, action: {})
 }

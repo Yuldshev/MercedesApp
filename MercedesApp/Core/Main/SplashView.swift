@@ -12,7 +12,7 @@ struct SplashView: View {
             .scaledToFit()
             .frame(width: 80, height: 80)
             .scaleEffect(scaleAmount)
-            .foregroundStyle(.white)
+            .foregroundStyle(.appLightGray)
         }
       }
       .onAppear {

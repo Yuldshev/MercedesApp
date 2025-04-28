@@ -15,5 +15,19 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>google</string>
+		<string>1018481597546-v3lgs7i3c2nccna5mo11pkdjltciah0g.apps.googleusercontent.com</string>
+	</array>
+
+	<key>UIAppFonts</key>
+	<array>
+		<string>CorporateAPro-Regular.ttf</string>
+		<string>CorporateAPro-Medium.ttf</string>
+		<string>Arial-Regular.ttf</string>
+		<string>Arial-Medium.ttf</string>
+		<string>Arial-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

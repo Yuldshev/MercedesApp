@@ -14,6 +14,7 @@
 		16CF2BCD2DBBE3F900AE31D5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BCC2DBBE3F900AE31D5 /* Alamofire */; };
 		16CF2BD22DBCEFD300AE31D5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BD12DBCEFD300AE31D5 /* Kingfisher */; };
 		16CF2BE02DBE154400AE31D5 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BDF2DBE154400AE31D5 /* Pow */; };
+		16CF2BF82DBF35AF00AE31D5 /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BF72DBF35AF00AE31D5 /* SwiftfulLoadingIndicators */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 				16CF2BD22DBCEFD300AE31D5 /* Kingfisher in Frameworks */,
 				16CF2BE02DBE154400AE31D5 /* Pow in Frameworks */,
 				16CF2BCD2DBBE3F900AE31D5 /* Alamofire in Frameworks */,
+				16CF2BF82DBF35AF00AE31D5 /* SwiftfulLoadingIndicators in Frameworks */,
 				1678EA6F2DB8A7320023FD82 /* FirebaseDatabase in Frameworks */,
 				1678EA712DB8A7320023FD82 /* FirebaseFirestore in Frameworks */,
 				1678EA492DB797740023FD82 /* SwiftfulRouting in Frameworks */,
@@ -102,6 +104,7 @@
 				16CF2BCC2DBBE3F900AE31D5 /* Alamofire */,
 				16CF2BD12DBCEFD300AE31D5 /* Kingfisher */,
 				16CF2BDF2DBE154400AE31D5 /* Pow */,
+				16CF2BF72DBF35AF00AE31D5 /* SwiftfulLoadingIndicators */,
 			);
 			productName = MercedesApp;
 			productReference = 1678EA392DB7950C0023FD82 /* MercedesApp.app */;
@@ -137,6 +140,7 @@
 				16CF2BCB2DBBE3F900AE31D5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				16CF2BD02DBCEFD300AE31D5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				16CF2BDE2DBE154400AE31D5 /* XCRemoteSwiftPackageReference "Pow" */,
+				16CF2BF62DBF35AF00AE31D5 /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1678EA3A2DB7950C0023FD82 /* Products */;
@@ -424,6 +428,14 @@
 				minimumVersion = 1.0.5;
 			};
 		};
+		16CF2BF62DBF35AF00AE31D5 /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulLoadingIndicators.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -461,6 +473,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 16CF2BDE2DBE154400AE31D5 /* XCRemoteSwiftPackageReference "Pow" */;
 			productName = Pow;
+		};
+		16CF2BF72DBF35AF00AE31D5 /* SwiftfulLoadingIndicators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16CF2BF62DBF35AF00AE31D5 /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */;
+			productName = SwiftfulLoadingIndicators;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

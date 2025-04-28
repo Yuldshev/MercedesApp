@@ -18,7 +18,7 @@ extension Router {
             .foregroundStyle(.white)
             .frame(width: 24, height: 24)
           Text(message)
-            .font(.system(size: 14))
+            .font(.arialRegular(size: 14))
             .foregroundStyle(.white)
         }
         .padding()
@@ -49,7 +49,7 @@ extension Router {
             .foregroundStyle(.white)
             .frame(width: 24, height: 24)
           Text(message)
-            .font(.system(size: 14))
+            .font(.arialRegular(size: 14))
             .foregroundStyle(.white)
         }
         .padding()

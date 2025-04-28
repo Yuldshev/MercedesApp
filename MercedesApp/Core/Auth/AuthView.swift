@@ -1,57 +1,38 @@
 import SwiftUI
+import Pow
 
 struct AuthView: View {
+  @StateObject private var vm = LoginViewModel()
   @Environment(\.router) var router
+  @State private var isLoading = false
   
   var body: some View {
-    VStack(spacing: 16) {
-      Spacer()
-      EmailAuth
-      AuthDivider
-      TokenAuth
-      BottomText
+    ZStack {
+      Color.appLightGray.ignoresSafeArea()
+      
+      VStack(spacing: 16) {
+        EmailAuth
+        BottomText
+      }
+      .padding(.horizontal, 24)
     }
-    .padding(.horizontal, 24)
-    .navigationWithLarge(title: "Authentication")
   }
   
   //MARK: - EmailAuth
   private var EmailAuth: some View {
     VStack(spacing: 16) {
-      CustomButton(title: "Sign In", color: .blue) {
-        router.showScreen(.push) { _ in
-          LoginView()
+      CustomButton(title: "Sign In", image: nil) {
+        router.showScreen(.push,) { _ in
+          LoginView().environmentObject(vm)
         }
       }
       
-      CustomButton(title: "Create Account", color: .gray) {
+      CustomButton(title: "Create Account", image: nil, color: .blue) {
         router.showScreen(.push) { _ in
           RegisterView()
         }
       }
-    }
-  }
-  
-  //MARK: - AuthDivider
-  private var AuthDivider: some View {
-    HStack {
-      VStack { Divider() }
-      Text("Login with")
-      VStack { Divider() }
-    }
-    .padding(.vertical, 8)
-  }
-  
-  //MARK: - TokenAuth
-  private var TokenAuth: some View {
-    VStack(spacing: 16) {
-      CustomButton(title: "Sign in with Google", color: .pink) {
-        
-      }
-      
-      CustomButton(title: "Sign in with Apple", color: .black) {
-        
-      }
+      .conditionalEffect(.repeat(.glow(color: .blue, radius: 30), every: 1.5), condition: !isLoading)
     }
   }
   
@@ -65,11 +46,12 @@ struct AuthView: View {
         }
       } label: {
         Text("Terms and Conditions")
-          .bold()
+          .foregroundStyle(.blue)
+          .font(.arialBold(size: 12))
           .underline()
       }
     }
-    .font(.system(size: 12))
+    .font(.arialRegular(size: 12))
   }
 }
 
