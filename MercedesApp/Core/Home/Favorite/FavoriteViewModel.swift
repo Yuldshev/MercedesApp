@@ -21,6 +21,8 @@ final class FavoriteViewModel: ObservableObject {
     favorites.append(car)
     service.saveFavorites(favorites)
     
+    message = .success("Added to favorites")
+    
     Task {
       try? await service.uploadCloud(favorites)
     }
@@ -29,6 +31,8 @@ final class FavoriteViewModel: ObservableObject {
   func removeFavorite(_ car: CarDisplay) {
     favorites.removeAll { $0.id == car.id }
     service.saveFavorites(favorites)
+    
+    message = .error("Remove from favorites")
     
     Task {
       try? await service.uploadCloud(favorites)

@@ -10,7 +10,7 @@ struct KingfisherView: View {
         KFImage(url)
           .placeholder { ProgressView() }
           .resizable()
-          .scaledToFit()
+          .scaledToFill()
       } else {
         Color.gray.opacity(0.2)
       }

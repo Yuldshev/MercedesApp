@@ -39,7 +39,7 @@ struct HeaderNavigation: ViewModifier {
       .toolbar {
         ToolbarItem(placement: .navigation) {
           Text(title)
-            .font(.corporateAMedium(size: 48))
+            .font(.corporateAMedium(size: 36))
             
         }
       }

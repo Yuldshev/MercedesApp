@@ -9,98 +9,50 @@ struct CatalogView: View {
     vm.getClasses()
   }
   
+  private let columns = [
+    GridItem(.flexible(), spacing: 8),
+    GridItem(.flexible(), spacing: 8)
+  ]
+  
   var body: some View {
-    VStack {
-      List {
-        ForEach(filteredCars) { name in
-          Button(name.className) {
+    ScrollView(.vertical, showsIndicators: false) {
+      Text("Mercedes Classes")
+        .font(.corporateAMedium(size: 34))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 24)
+      
+      LazyVGrid(columns: columns, spacing: 8) {
+        ForEach(filteredCars) { category in
+          Button {
             router.showScreen(.push) { _ in
-              CarListView(cars: name.cars)
+              CarModelView(cars: category.cars)
                 .environmentObject(vmFav)
+                .navigationWithInline(title: category.className)
             }
-          }
-        }
-      }
-      .listStyle(.plain)
-    }
-    .navigationWithLarge(title: "Catalogue")
-    .onChange(of: vm.message) { _, new in
-      switch new {
-        case .error(let text):
-          router.showErrorModal(message: text)
-        case .success(let text):
-          router.showSuccessModal(message: text)
-      }
-    }
-    .onChange(of: vmFav.message) { _, new in
-      switch new {
-        case .error(let text):
-          router.showErrorModal(message: text)
-        case .success(let text):
-          router.showSuccessModal(message: text)
-      }
-    }
-    
-    //TODO: - DELETE COMPLETE
-    .task {
-      await vm.fetchAllClass()
-    }
-  }
-}
-
-struct CarListView: View {
-  @EnvironmentObject var vmFav: FavoriteViewModel
-  @Environment(\.router) var router
-  let cars: [CarDisplay]
-  
-  
-  var body: some View {
-    List(cars) { car in
-      Button(car.name) {
-        router.showScreen(.push) { _ in
-          CarDetailView(car: car)
-        }
-      }
-      .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-        if vmFav.isFavorite(car) {
-          Button {
-            vmFav.addFavorite(car)
           } label: {
-            Label("Unlike", systemImage: "heart.slash.fill")
+            CatalogClassView(className: category)
+              .frame(maxWidth: .infinity)
+              .frame(height: 200)
           }
-          .tint(.gray)
-        } else {
-          Button {
-            vmFav.addFavorite(car)
-          } label: {
-            Label("Like", systemImage: "heart.fill")
-          }
-          .tint(.pink)
         }
+      }
+      .padding(.horizontal, 24)
+      .onChange(of: vm.message) { _, new in
+        switch new {
+          case .error(let text):
+            router.showErrorModal(message: text)
+          case .success(let text):
+            router.showSuccessModal(message: text)
+        }
+      }
+            
+      .task {
+        await vm.fetchAllClass()
       }
     }
   }
 }
 
-struct CarDetailView: View {
-  var car: CarDisplay
-  
-  var body: some View {
-    VStack {
-      KingfisherView(url: car.imageURL)
-      VStack {
-        Text(car.name)
-        Text(car.body)
-        Text("Size: \(car.height) x \(car.width) x \(car.lenght)")
-        Text("MaxSpeed: \(car.topSpeed)")
-        Text("Torque: \(car.torque)")
-        Text("Wheels size: \(car.wheelBase)")
-        Text("Weight: \(car.weight)")
-        Text("Price: \(car.price)")
-      }
-    }
-  }
-}
 
 #Preview {
   CatalogView()

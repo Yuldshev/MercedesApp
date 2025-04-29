@@ -10,6 +10,8 @@ struct DelegateView: View {
   
   var body: some View {
     ZStack {
+      Color.appLightGray.ignoresSafeArea()
+      
       VStack {
         switch selectedTab {
           case .home:
@@ -22,6 +24,8 @@ struct DelegateView: View {
               .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
               .environmentObject(vmCar)
               .environmentObject(vmLike)
+              .frame(maxHeight: .infinity)
+              .background(.appLightGray)
           case .favorite:
             FavoriteView()
               .transition(.movingParts.wipe(edge: .bottom, blurRadius: 50))
@@ -36,9 +40,6 @@ struct DelegateView: View {
         Spacer()
         CustomTabView(selectedTab: $selectedTab)
       }
-    }
-    .task {
-      await vmCar.fetchAllClass()
     }
   }
 }
