@@ -24,6 +24,7 @@ struct CatalogView: View {
       LazyVGrid(columns: columns, spacing: 8) {
         ForEach(filteredCars) { category in
           Button {
+            print(category)
             router.showScreen(.push) { _ in
               CarModelView(cars: category.cars)
                 .environmentObject(vmFav)

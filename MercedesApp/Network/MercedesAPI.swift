@@ -20,7 +20,7 @@ enum MercedesAPI {
 }
 
 enum TypeClasses: String, CaseIterable {
-  case a, b, c, e, s, g, cla, cle, gla, glb, glc, gle, gls, gt, sl
+  case a, b, c, e, s, g, cle, gla, glb, glc, gle, gls, gt, sl
   
   var fullName: String {
     rawValue + "-class"
