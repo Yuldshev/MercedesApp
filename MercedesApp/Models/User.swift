@@ -5,4 +5,5 @@ struct User: Codable {
   let name: String
   let email: String
   let joined: TimeInterval
+  var profileImageURL: String?
 }

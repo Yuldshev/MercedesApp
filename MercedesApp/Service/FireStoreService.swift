@@ -1,10 +1,12 @@
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 
 protocol FireStoreProtocol {
   func saveData<T: Encodable>(collection: String, dataId: String, data: T) async throws
   func loadData<T: Decodable>(collection: String, as type: T.Type) async throws -> [T]
   func loadDocument<T: Decodable>(collection: String, documentId: String, as type: T.Type) async throws -> T
+  
 }
 
 final class FireStoreService: FireStoreProtocol {
@@ -12,7 +14,7 @@ final class FireStoreService: FireStoreProtocol {
   
   func saveData<T: Encodable>(collection: String, dataId: String, data: T) async throws {
     let dataRef = db.collection(collection).document(dataId)
-    try dataRef.setData(from: data)
+    try dataRef.setData(from: data, merge: true)
   }
   
   func loadData<T: Decodable>(collection: String, as type: T.Type) async throws -> [T] {

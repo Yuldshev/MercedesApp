@@ -11,6 +11,7 @@
 		1678EA6D2DB8A7320023FD82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA6C2DB8A7320023FD82 /* FirebaseAuth */; };
 		1678EA6F2DB8A7320023FD82 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA6E2DB8A7320023FD82 /* FirebaseDatabase */; };
 		1678EA712DB8A7320023FD82 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1678EA702DB8A7320023FD82 /* FirebaseFirestore */; };
+		169E6F8C2DC2216A00E55F99 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 169E6F8B2DC2216A00E55F99 /* FirebaseStorage */; };
 		16CF2BCD2DBBE3F900AE31D5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BCC2DBBE3F900AE31D5 /* Alamofire */; };
 		16CF2BD22DBCEFD300AE31D5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BD12DBCEFD300AE31D5 /* Kingfisher */; };
 		16CF2BE02DBE154400AE31D5 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = 16CF2BDF2DBE154400AE31D5 /* Pow */; };
@@ -49,6 +50,7 @@
 			files = (
 				16CF2BD22DBCEFD300AE31D5 /* Kingfisher in Frameworks */,
 				16CF2BE02DBE154400AE31D5 /* Pow in Frameworks */,
+				169E6F8C2DC2216A00E55F99 /* FirebaseStorage in Frameworks */,
 				16CF2BCD2DBBE3F900AE31D5 /* Alamofire in Frameworks */,
 				16CF2BF82DBF35AF00AE31D5 /* SwiftfulLoadingIndicators in Frameworks */,
 				1678EA6F2DB8A7320023FD82 /* FirebaseDatabase in Frameworks */,
@@ -65,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				1678EA3B2DB7950C0023FD82 /* MercedesApp */,
+				169E6F8A2DC2216A00E55F99 /* Frameworks */,
 				1678EA3A2DB7950C0023FD82 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +78,13 @@
 				1678EA392DB7950C0023FD82 /* MercedesApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		169E6F8A2DC2216A00E55F99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +115,7 @@
 				16CF2BD12DBCEFD300AE31D5 /* Kingfisher */,
 				16CF2BDF2DBE154400AE31D5 /* Pow */,
 				16CF2BF72DBF35AF00AE31D5 /* SwiftfulLoadingIndicators */,
+				169E6F8B2DC2216A00E55F99 /* FirebaseStorage */,
 			);
 			productName = MercedesApp;
 			productReference = 1678EA392DB7950C0023FD82 /* MercedesApp.app */;
@@ -458,6 +469,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		169E6F8B2DC2216A00E55F99 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1678EA6B2DB8A7320023FD82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		16CF2BCC2DBBE3F900AE31D5 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
