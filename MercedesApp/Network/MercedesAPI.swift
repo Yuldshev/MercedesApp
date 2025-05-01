@@ -2,7 +2,7 @@ import Foundation
 
 enum MercedesAPI {
   static let baseURL = "https://api.mercedes-benz.com/configurator/v2"
-  static let apiKey = "433c784e-ac9f-46e3-bc7e-c3b6f0165df2"
+  static let apiKey = "a0168cab-0ca1-4421-8ba0-14f95152f820"
   static let models = "vehicle-models"
   static let market = "markets/en_DE"
   static let type = "classes"

@@ -3,8 +3,7 @@ import SwiftUI
 struct HomeView: View {
   @EnvironmentObject var vm: CarViewModel
   @EnvironmentObject var vmLike: FavoriteViewModel
-  
-  
+  @Environment(\.router) var router
   
   var body: some View {
     ZStack {
@@ -25,6 +24,14 @@ struct HomeView: View {
             .padding(.top, 16)
         }
         .navigationWithLarge(title: "Home")
+        .onChange(of: vm.message, { _, new in
+          switch new {
+            case .error(let text):
+              router.showErrorModal(message: text)
+            case .success(let text):
+              router.showSuccessModal(message: text)
+          }
+        })
         .task {
           await vm.fetchAllClass()
         }

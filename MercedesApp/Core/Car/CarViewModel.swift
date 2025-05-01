@@ -13,7 +13,7 @@ final class CarViewModel: ObservableObject {
   }
   
   func fetchAllClass() async {
-    guard allClass.isEmpty else { return }
+    if !allClass.isEmpty { return }
     
     isLoading = true
     defer { isLoading = false }

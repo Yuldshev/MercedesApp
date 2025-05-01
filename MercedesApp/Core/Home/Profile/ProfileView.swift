@@ -74,13 +74,13 @@ struct ProfileView: View {
   
   private var versusView: some View {
     CustomButtonList(title: "Versus Cars") {
-      
+      router.showBasicAlert(text: "Coming soon")
     }
   }
   
   private var localization: some View {
     CustomButtonList(title: "Language") {
-      
+      router.showBasicAlert(text: "Coming soon")
     }
   }
   
